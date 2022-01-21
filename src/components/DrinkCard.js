@@ -1,20 +1,58 @@
-import { Box, Center, Heading, Text, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Heading,
+  Text,
+  Stack,
+  Icon,
+  Collapse,
+  Button,
+} from "@chakra-ui/react";
+import { FaTrophy } from "react-icons/fa";
+import { useState } from "react";
 
-export default function DrinkCard({ name, abv, portions }) {
+const ranks = {
+  1: "gold",
+  2: "silver",
+  3: "orange.700",
+};
+
+export default function DrinkCard({ name, abv, portions, rank }) {
+  const [show, setShow] = useState(false);
+
+  const handleToggle = () => {
+    setShow(!show);
+    console.log("click !");
+  };
   return (
     <Center py={6} pl={4} pr={4}>
       <Box
-        role={"group"}
+        // role={"group"}
         p={6}
         maxW={"800px"}
         w={"full"}
         bg={"white"}
-        boxShadow={"2xl"}
-        // rounded={"lg"}
-        pos={"relative"}
-        zIndex={1}
+        boxShadow={"lg"}
+        rounded={"lg"}
+        borderWidth={2}
+        borderColor={"black"}
+        // pos={"relative"}
+        // zIndex={1}
+        onClick={handleToggle}
       >
         <Stack align={"center"}>
+          {rank in ranks ? (
+            <Icon
+              as={FaTrophy}
+              color={ranks[rank]}
+              alignSelf={"start"}
+              boxSize={6}
+            />
+          ) : (
+            <Heading alignSelf={"start"} fontSize={24} pl={2}>
+              {rank}
+            </Heading>
+          )}
           <Heading fontSize={"2xl"} fontFamily={"body"} fontWeight={600}>
             {name}
           </Heading>
@@ -22,12 +60,19 @@ export default function DrinkCard({ name, abv, portions }) {
             {`${abv}% ABV`}
           </Text>
           <Stack direction={"row"} align={"center"}>
-            <Text>{portions[0].name}</Text>
-            <Text color={"gray.600"}>{`£${portions[0].price}`}</Text>
+            <Text fontWeight={500}>{portions[0].name}</Text>
+            <Text color={"gray.600"} fontWeight={500}>{`£${parseFloat(
+              portions[0].price
+            ).toFixed(2)}`}</Text>
             <Text color={"red.400"} fontWeight={500}>
               {`${portions[0].unitsPerPound} u/£`}
             </Text>
           </Stack>
+          {/* <Collapse startingHeight={40} isOpen={show}>
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+            labore wes anderson cred nesciunt sapiente ea proident.
+          </Collapse> */}
         </Stack>
       </Box>
     </Center>

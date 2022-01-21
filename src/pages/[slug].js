@@ -17,6 +17,7 @@ export default function Slug(props) {
               key={index}
               name={drink.name}
               abv={drink.abv}
+              rank={index + 1}
               portions={drink.portions}
             ></DrinkCard>
           );
