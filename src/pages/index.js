@@ -9,6 +9,11 @@ export default function Home() {
       <Head>
         <title>wetherspenny</title>
         <meta property="og:title" content="wetherspenny" key="title" />
+        <link
+          rel="apple-touch-icon"
+          sizes="57x57"
+          href="public/apple-touch-icon.png"
+        />
       </Head>
       <Center h={"100vh"}>
         <VStack minW={"60vw"} spacing={20}>
