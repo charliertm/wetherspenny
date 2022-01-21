@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { pubs_info } from "../pubs_info";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 const pubs = pubs_info.map((pub) => {
   return {
@@ -23,8 +23,22 @@ export default function PubInput(props) {
 
   const handleSelectedItemsChange = (selectedItems) => {
     if (selectedItems) {
-      router.push(selectedItems[0].value.slug);
+      setSelectedItems(selectedItems);
+      if (selectedItems.length > 0) {
+        router.push(selectedItems[0].value.slug);
+      }
     }
+  };
+
+  const customRender = (selected) => {
+    return (
+      <Flex flexDir="column">
+        <Text fontWeight={600}>{selected.label} </Text>
+        <Text fontWeight={200} fontSize={12}>
+          {selected.value.city}
+        </Text>
+      </Flex>
+    );
   };
 
   return (
@@ -35,6 +49,7 @@ export default function PubInput(props) {
         disableCreateItem={true}
         items={pickerItems}
         selectedItems={selectedItems}
+        itemRenderer={customRender}
         onSelectedItemsChange={(changes) =>
           handleSelectedItemsChange(changes.selectedItems)
         }
@@ -48,7 +63,9 @@ export default function PubInput(props) {
         }}
         hideToggleButton={true}
         highlightItemBg={"blue.200"}
-        listStyleProps={{ maxH: "200px", overflow: "hidden" }}
+        listStyleProps={{ maxH: "200px", overflowX: "hidden" }}
+        labelStyleProps={{ alignSelf: "center" }}
+        // icon={"CheckCircleIcon"}
       />
     </Box>
   );

@@ -4,7 +4,7 @@ const styles = {
   global: (props) => ({
     body: {
       color: "gray.600",
-      bg: "wetherspoons.500",
+      bg: "white",
     },
   }),
 };
