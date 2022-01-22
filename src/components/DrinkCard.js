@@ -1,13 +1,4 @@
-import {
-  Box,
-  Center,
-  Heading,
-  Text,
-  Stack,
-  Icon,
-  Collapse,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Center, Heading, Text, Stack, Icon } from "@chakra-ui/react";
 import { FaTrophy } from "react-icons/fa";
 import { useState } from "react";
 
@@ -22,12 +13,10 @@ export default function DrinkCard({ name, abv, portions, rank }) {
 
   const handleToggle = () => {
     setShow(!show);
-    console.log("click !");
   };
   return (
     <Center py={6} pl={4} pr={4}>
       <Box
-        // role={"group"}
         p={6}
         maxW={"800px"}
         w={"full"}
@@ -36,8 +25,6 @@ export default function DrinkCard({ name, abv, portions, rank }) {
         rounded={"lg"}
         borderWidth={2}
         borderColor={"black"}
-        // pos={"relative"}
-        // zIndex={1}
         onClick={handleToggle}
       >
         <Stack align={"center"}>
@@ -68,11 +55,6 @@ export default function DrinkCard({ name, abv, portions, rank }) {
               {`${portions[0].unitsPerPound} u/£`}
             </Text>
           </Stack>
-          {/* <Collapse startingHeight={40} isOpen={show}>
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-            labore wes anderson cred nesciunt sapiente ea proident.
-          </Collapse> */}
         </Stack>
       </Box>
     </Center>

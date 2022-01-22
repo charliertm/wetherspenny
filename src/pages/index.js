@@ -1,4 +1,4 @@
-import { Center, Image, VStack, Container, Box } from "@chakra-ui/react";
+import { Center, VStack, Container, Box } from "@chakra-ui/react";
 import PubInput from "../components/PubInput";
 import Head from "next/head";
 import TextLogo from "../../public/static/TextLogo.svg";
@@ -23,7 +23,6 @@ export default function Home() {
           </Container>
           <Box />
           <PubInput
-            // m={4}
             p={6}
             maxW={"800px"}
             w={"full"}

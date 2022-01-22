@@ -5,7 +5,7 @@ import step3 from "../../public/static/step3.jpg";
 import step4 from "../../public/static/step4.jpg";
 import Image from "next/image";
 
-const AddMeAsAnApp = () => {
+export default function AddMeAsAnApp() {
   return (
     <Center w={"full"} p={4}>
       <VStack spacing={10}>
@@ -30,6 +30,4 @@ const AddMeAsAnApp = () => {
       </VStack>
     </Center>
   );
-};
-
-export default AddMeAsAnApp;
+}

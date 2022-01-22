@@ -16,11 +16,6 @@ export default function PubInput(props) {
   const [selectedItems, setSelectedItems] = useState([]);
   const router = useRouter();
 
-  // const handleCreateItem = (item) => {
-  //   setPickerItems((curr) => [...curr, item]);
-  //   setSelectedItems((curr) => [item]);
-  // };
-
   const handleSelectedItemsChange = (selectedItems) => {
     if (selectedItems) {
       setSelectedItems(selectedItems);
@@ -65,7 +60,6 @@ export default function PubInput(props) {
         highlightItemBg={"blue.200"}
         listStyleProps={{ maxH: "200px", overflowX: "hidden" }}
         labelStyleProps={{ alignSelf: "center" }}
-        // icon={"CheckCircleIcon"}
       />
     </Box>
   );

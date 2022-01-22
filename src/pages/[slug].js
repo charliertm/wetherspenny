@@ -23,7 +23,6 @@ export default function Slug(props) {
           );
         })}
       </List>
-      {console.log(props.data[0])}
     </Center>
   );
 }
