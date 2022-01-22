@@ -2,6 +2,7 @@ import { Center, Image, VStack, Container, Box } from "@chakra-ui/react";
 import PubInput from "../components/PubInput";
 import Head from "next/head";
 import TextLogo from "../../public/static/TextLogo.svg";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -35,7 +36,9 @@ export default function Home() {
             zIndex={1}
           />
           <Box />
-          <Box>Footer</Box>
+          <Box>
+            <Footer />
+          </Box>
         </VStack>
       </Center>
     </>
