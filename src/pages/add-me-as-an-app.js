@@ -10,7 +10,7 @@ export default function AddMeAsAnApp() {
     <Center w={"full"} p={4}>
       <VStack spacing={10}>
         <Center w={"60%"} pt={2}>
-          <Text alignSelf={"center"} alignSelf={"center"}>
+          <Text alignSelf={"center"}>
             There is no shot this would get added to the App Store. So do this.
             Now.
           </Text>
