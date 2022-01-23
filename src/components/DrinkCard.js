@@ -12,8 +12,10 @@ import {
   HStack,
   Spacer,
   StackDivider,
+  Tooltip,
+  VisuallyHidden,
 } from "@chakra-ui/react";
-import { FaTrophy } from "react-icons/fa";
+import { FaTrophy, FaStar, FaDollarSign } from "react-icons/fa";
 import { useState } from "react";
 
 const ranks = {
@@ -76,10 +78,24 @@ export default function DrinkCard({ name, abv, portions, rank }) {
           <Text color={"gray.500"} fontSize={"sm"} textTransform={"uppercase"}>
             {`${abv}% ABV`}
           </Text>
-          {/* could conditionally render box if portions.length is 1 ? */}
-          <Collapse in={isOpen} w={"full"} startingHeight={30}>
+          <Collapse
+            in={portions.length > 1 ? isOpen : true}
+            w={"full"}
+            startingHeight={30}
+          >
             {portions.map((portion, index) => {
-              return <PortionInfo {...portion} h={22} py={4} key={index} />;
+              return (
+                <HStack>
+                  {index === 0 ? (
+                    <Tooltip label={"Best Value"}>
+                      <Icon as={FaDollarSign} boxSize={4} color={"green.200"} />
+                    </Tooltip>
+                  ) : (
+                    <Box boxSize={4} />
+                  )}
+                  <PortionInfo {...portion} h={22} py={4} key={index} />
+                </HStack>
+              );
             })}
           </Collapse>
         </VStack>
