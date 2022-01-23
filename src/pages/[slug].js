@@ -12,15 +12,20 @@ import { slugs_to_ids } from "../slugs_to_ids";
 import fetch from "node-fetch";
 import ErrorPage from "next/error";
 import DrinkCard from "../components/DrinkCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBeer } from "react-icons/fa";
 
 export default function Slug(props) {
+  const [drinks, setDrinks] = useState([]);
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setDrinks(props.data);
+  }, [props.data]);
+
   if (!props.data) {
     return <ErrorPage statusCode={404} />;
   }
-  const [drinks, setDrinks] = useState(props.data);
-  const [value, setValue] = useState("");
 
   const handleChange = (event) => {
     event.preventDefault();
