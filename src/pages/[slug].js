@@ -51,8 +51,8 @@ export default function Slug(props) {
             bg={"white"}
             boxShadow={"lg"}
             rounded={"lg"}
-            borderWidth={2}
-            borderColor={"black"}
+            borderWidth={1}
+            borderColor={"blackAlpha.200"}
             onChange={handleChange}
             value={value}
             focusBorderColor={"wetherspoons.500"}
