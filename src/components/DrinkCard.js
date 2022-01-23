@@ -85,7 +85,7 @@ export default function DrinkCard({ name, abv, portions, rank }) {
           >
             {portions.map((portion, index) => {
               return (
-                <HStack>
+                <HStack key={index}>
                   {index === 0 ? (
                     <Tooltip label={"Best Value"}>
                       <Icon as={FaDollarSign} boxSize={4} color={"green.200"} />
