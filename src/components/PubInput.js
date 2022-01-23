@@ -2,7 +2,15 @@ import { useState } from "react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { pubs_info } from "../pubs_info";
-import { Box, Center, Flex, Spinner, Text, theme } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Container,
+  Flex,
+  Spinner,
+  Text,
+  theme,
+} from "@chakra-ui/react";
 
 const pubs = pubs_info.map((pub) => {
   return {
@@ -29,7 +37,7 @@ export default function PubInput(props) {
 
   const customRender = (selected) => {
     return (
-      <Flex flexDir="column">
+      <Flex flexDir="column" maxW={"160px"}>
         <Text fontWeight={600}>{selected.label} </Text>
         <Text fontWeight={200} fontSize={12}>
           {selected.value.city}
@@ -39,7 +47,7 @@ export default function PubInput(props) {
   };
 
   return (
-    <Box {...props}>
+    <Container {...props}>
       {loading ? (
         <Center>
           <Spinner speed="0.8s" />
@@ -66,10 +74,13 @@ export default function PubInput(props) {
           }}
           hideToggleButton={true}
           highlightItemBg={"blue.200"}
-          listStyleProps={{ maxH: "200px", overflowX: "hidden" }}
+          listStyleProps={{
+            maxH: "200px",
+            overflowX: "hidden",
+          }}
           labelStyleProps={{ alignSelf: "center" }}
         />
       )}
-    </Box>
+    </Container>
   );
 }
