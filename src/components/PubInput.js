@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { pubs_info } from "../pubs_info";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, theme } from "@chakra-ui/react";
 
 const pubs = pubs_info.map((pub) => {
   return {
@@ -49,12 +49,13 @@ export default function PubInput(props) {
           handleSelectedItemsChange(changes.selectedItems)
         }
         inputStyleProps={{
-          borderColor: "grey.100",
+          borderColor: theme.colors.blackAlpha["400"],
           focusBorderColor: "wetherspoons.500",
           _hover: {
             borderColor: "wetherspoons.500",
           },
-          borderWidth: 2,
+          borderWidth: 1,
+          boxShadow: "md",
         }}
         hideToggleButton={true}
         highlightItemBg={"blue.200"}

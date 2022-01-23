@@ -27,9 +27,9 @@ export default function Home() {
             maxW={"800px"}
             w={"full"}
             bg={"white"}
-            boxShadow={"lg"}
-            borderWidth={"2px"}
-            borderColor={"gray.600"}
+            boxShadow={"xl"}
+            borderWidth={1}
+            borderColor={"blackAlpha.400"}
             rounded={"md"}
             pos={"relative"}
             zIndex={1}
