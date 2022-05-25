@@ -1,19 +1,9 @@
-import {
-  Center,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  List,
-  VStack,
-  Icon,
-  InputLeftAddon,
-} from "@chakra-ui/react";
+import { Center, Input, List, VStack } from "@chakra-ui/react";
 import { slugs_to_ids } from "../slugs_to_ids";
 import fetch from "node-fetch";
 import ErrorPage from "next/error";
 import DrinkCard from "../components/DrinkCard";
 import { useEffect, useState } from "react";
-import { FaBeer } from "react-icons/fa";
 
 export default function Slug(props) {
   const [drinks, setDrinks] = useState([]);

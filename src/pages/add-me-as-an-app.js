@@ -16,16 +16,16 @@ export default function AddMeAsAnApp() {
           </Text>
         </Center>
         <Box boxShadow={"xl"}>
-          <Image width={300} height={500} src={step1} />
+          <Image width={300} height={500} src={step1} alt={"step 1"} />
         </Box>
         <Box boxShadow={"xl"}>
-          <Image width={300} height={500} src={step2} />
+          <Image width={300} height={500} src={step2} alt={"step 2"} />
         </Box>
         <Box boxShadow={"xl"}>
-          <Image width={300} height={500} src={step3} />
+          <Image width={300} height={500} src={step3} alt={"step 3"} />
         </Box>
         <Box boxShadow={"xl"}>
-          <Image width={300} height={500} src={step4} />
+          <Image width={300} height={500} src={step4} alt={"step 4"} />
         </Box>
       </VStack>
     </Center>

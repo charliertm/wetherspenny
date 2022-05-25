@@ -1,9 +1,4 @@
-import { useState } from "react";
-import { CUIAutoComplete } from "chakra-ui-autocomplete";
-import { useRouter } from "next/router";
-import { pubs_info } from "../pubs_info";
 import {
-  Box,
   Center,
   Container,
   Flex,
@@ -11,6 +6,10 @@ import {
   Text,
   theme,
 } from "@chakra-ui/react";
+import { CUIAutoComplete } from "chakra-ui-autocomplete";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { pubs_info } from "../pubs_info";
 
 const pubs = pubs_info.map((pub) => {
   return {
@@ -20,7 +19,7 @@ const pubs = pubs_info.map((pub) => {
 });
 
 export default function PubInput(props) {
-  const [pickerItems, setPickerItems] = useState(pubs);
+  const [pickerItems] = useState(pubs);
   const [selectedItems, setSelectedItems] = useState([]);
   const router = useRouter();
   const [loading, SetLoading] = useState(false);

@@ -1,22 +1,16 @@
 import {
   Box,
   Center,
-  Heading,
-  Text,
-  Stack,
-  Icon,
   Collapse,
-  Fade,
+  Heading,
+  HStack,
+  Icon,
+  Text,
+  Tooltip,
   useDisclosure,
   VStack,
-  HStack,
-  Spacer,
-  StackDivider,
-  Tooltip,
-  VisuallyHidden,
 } from "@chakra-ui/react";
-import { FaTrophy, FaStar, FaDollarSign } from "react-icons/fa";
-import { useState } from "react";
+import { FaDollarSign, FaTrophy } from "react-icons/fa";
 
 const ranks = {
   1: "gold",
