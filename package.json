@@ -1,6 +1,16 @@
 {
   "name": "wetherspenny",
+  "author": "charliertm",
+  "description": "wetherspenny is a simple website to show you the cheapest drinks at wetherspoons",
+  "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://github.com/charliertm/wetherspenny",
   "private": true,
+  "engines": {
+    "node": ">=16.15.0",
+    "yarn": ">=1.22.0",
+    "npm": "please-use-yarn"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
