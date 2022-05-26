@@ -1,8 +1,9 @@
-import { Flex } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import Logo from "../../public/static/Logo.svg";
 import Footer from "../components/Footer";
 import PubInput from "../components/PubInput";
+import PubLocator from "../components/PubLocator";
 
 export default function Home() {
   return (
@@ -25,7 +26,10 @@ export default function Home() {
         padding={20}
       >
         <Logo />
-        <PubInput w={"full"} />
+        <Container align={"center"}>
+          <PubLocator />
+          <PubInput w={"full"} />
+        </Container>
         <Footer />
       </Flex>
     </>

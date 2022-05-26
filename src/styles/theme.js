@@ -13,18 +13,12 @@ const colors = {
   wetherspoons: {
     500: "#0261c8",
   },
-};
-
-const semanticTokens = {
-  colors: {
-    spoonyblue: "#0563C9",
-    dollargreen: "#009245",
-  },
+  spoonyblue: "#0563C9",
+  dollargreen: "#009245",
 };
 
 const theme = extendTheme({
   colors,
-  semanticTokens,
 });
 
 export default theme;
