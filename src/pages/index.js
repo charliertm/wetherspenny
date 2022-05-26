@@ -1,8 +1,8 @@
-import { Center, VStack, Container, Box } from "@chakra-ui/react";
-import PubInput from "../components/PubInput";
+import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
-import TextLogo from "../../public/static/TextLogo.svg";
+import Logo from "../../public/static/Logo.svg";
 import Footer from "../components/Footer";
+import PubInput from "../components/PubInput";
 
 export default function Home() {
   return (
@@ -16,30 +16,18 @@ export default function Home() {
           href="public/apple-touch-icon.png"
         />
       </Head>
-      <Center h={"100vh"}>
-        <VStack minW={"60vw"} spacing={20}>
-          <Container minW={"40vw"}>
-            <TextLogo />
-          </Container>
-          <Box />
-          <PubInput
-            p={6}
-            maxW={"800px"}
-            w={"full"}
-            bg={"white"}
-            boxShadow={"xl"}
-            borderWidth={1}
-            borderColor={"blackAlpha.400"}
-            rounded={"md"}
-            pos={"relative"}
-            zIndex={1}
-          />
-          <Box />
-          <Box>
-            <Footer />
-          </Box>
-        </VStack>
-      </Center>
+      <Flex
+        h={"100vh"}
+        flexDirection={"column"}
+        justify={"space-between"}
+        alignSelf={"center"}
+        alignItems={"center"}
+        padding={20}
+      >
+        <Logo />
+        <PubInput w={"full"} />
+        <Footer />
+      </Flex>
     </>
   );
 }

@@ -1,17 +1,13 @@
 import { extendTheme } from "@chakra-ui/react";
 
-const styles = {
-  global: (props) => ({
-    body: {
-      color: "gray.600",
-      bg: "white",
-    },
-  }),
-};
-
-const components = {
-  // for customing default chakra components
-};
+// const styles = {
+//   global: () => ({
+//     body: {
+//       color: "gray.600",
+//       bg: "white",
+//     },
+//   }),
+// };
 
 const colors = {
   wetherspoons: {
@@ -19,10 +15,16 @@ const colors = {
   },
 };
 
+const semanticTokens = {
+  colors: {
+    spoonyblue: "#0563C9",
+    dollargreen: "#009245",
+  },
+};
+
 const theme = extendTheme({
-  components,
-  styles,
   colors,
+  semanticTokens,
 });
 
 export default theme;

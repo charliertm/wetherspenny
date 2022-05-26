@@ -1,11 +1,4 @@
-import {
-  Center,
-  Container,
-  Flex,
-  Spinner,
-  Text,
-  theme,
-} from "@chakra-ui/react";
+import { Box, Center, Flex, Spinner, Text } from "@chakra-ui/react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -22,11 +15,11 @@ export default function PubInput(props) {
   const [pickerItems] = useState(pubs);
   const [selectedItems, setSelectedItems] = useState([]);
   const router = useRouter();
-  const [loading, SetLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSelectedItemsChange = (selectedItems) => {
     if (selectedItems) {
-      SetLoading(true);
+      setLoading(true);
       setSelectedItems(selectedItems);
       if (selectedItems.length > 0) {
         router.push(selectedItems[0].value.slug);
@@ -46,15 +39,14 @@ export default function PubInput(props) {
   };
 
   return (
-    <Container {...props}>
+    <Box {...props}>
       {loading ? (
         <Center>
           <Spinner speed="0.8s" />
         </Center>
       ) : (
         <CUIAutoComplete
-          label="Choose your spoons"
-          placeholder="Name of your Spoons"
+          placeholder="Search for your spoons"
           disableCreateItem={true}
           items={pickerItems}
           selectedItems={selectedItems}
@@ -63,13 +55,12 @@ export default function PubInput(props) {
             handleSelectedItemsChange(changes.selectedItems)
           }
           inputStyleProps={{
-            borderColor: theme.colors.blackAlpha["400"],
-            focusBorderColor: "wetherspoons.500",
+            borderColor: "gray.200",
+            focusBorderColor: "dollargreen",
             _hover: {
-              borderColor: "wetherspoons.500",
+              borderColor: "dollargreen",
             },
-            borderWidth: 1,
-            boxShadow: "md",
+            borderWidth: 2,
           }}
           hideToggleButton={true}
           highlightItemBg={"blue.200"}
@@ -80,6 +71,6 @@ export default function PubInput(props) {
           labelStyleProps={{ alignSelf: "center" }}
         />
       )}
-    </Container>
+    </Box>
   );
 }

@@ -3,12 +3,12 @@ import { FaApple, FaGithub } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <Flex>
+    <Flex flexDir={"row"}>
       <HStack as={Link} href={"/add-me-as-an-app"}>
         <Icon as={FaApple} />
         <Text>Add Me as an App</Text>
       </HStack>
-      <Spacer pl={2} pr={2}>
+      <Spacer px={2} flex={"none"}>
         |
       </Spacer>
       <HStack as={Link} href={"https://github.com/charliertm/wetherspenny"}>
