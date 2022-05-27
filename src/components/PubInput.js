@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -11,16 +11,16 @@ const pubs = pubs_info.map((pub) => {
   };
 });
 
-export default function PubInput(props) {
+export default function PubInput({ handleLoading, ...props }) {
   const [pickerItems] = useState(pubs);
   const [selectedItems, setSelectedItems] = useState([]);
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
 
   const handleSelectedItemsChange = (selectedItems) => {
     if (selectedItems) {
-      setLoading(true);
+      handleLoading();
       setSelectedItems(selectedItems);
+      console.log("pushing !");
       if (selectedItems.length > 0) {
         router.push(selectedItems[0].value.slug);
       }
@@ -29,9 +29,11 @@ export default function PubInput(props) {
 
   const customRender = (selected) => {
     return (
-      <Flex flexDir="column" maxW={"160px"}>
-        <Text fontWeight={600}>{selected.label} </Text>
-        <Text fontWeight={200} fontSize={12}>
+      <Flex flexDir="column" width="full">
+        <Text fontWeight={"bold"} textColor={"white"}>
+          {selected.label}{" "}
+        </Text>
+        <Text fontWeight={"light"} fontSize={"sm"} textColor={"white"}>
           {selected.value.city}
         </Text>
       </Flex>
@@ -40,37 +42,39 @@ export default function PubInput(props) {
 
   return (
     <Box {...props}>
-      {loading ? (
-        <Center>
-          <Spinner speed="0.8s" />
-        </Center>
-      ) : (
-        <CUIAutoComplete
-          placeholder="Search for your spoons"
-          disableCreateItem={true}
-          items={pickerItems}
-          selectedItems={selectedItems}
-          itemRenderer={customRender}
-          onSelectedItemsChange={(changes) =>
-            handleSelectedItemsChange(changes.selectedItems)
-          }
-          inputStyleProps={{
-            borderColor: "gray.200",
-            focusBorderColor: "dollargreen",
-            _hover: {
-              borderColor: "dollargreen",
-            },
-            borderWidth: 2,
-          }}
-          hideToggleButton={true}
-          highlightItemBg={"blue.200"}
-          listStyleProps={{
-            maxH: "200px",
-            overflowX: "hidden",
-          }}
-          labelStyleProps={{ alignSelf: "center" }}
-        />
-      )}
+      <CUIAutoComplete
+        disableCreateItem={true}
+        items={pickerItems}
+        selectedItems={selectedItems}
+        itemRenderer={customRender}
+        onSelectedItemsChange={(changes) =>
+          handleSelectedItemsChange(changes.selectedItems)
+        }
+        placeholder="Search for your spoons"
+        inputStyleProps={{
+          color: "dollargreen",
+          _placeholder: {
+            opacity: 0.4,
+            color: "inherit",
+          },
+          size: "lg",
+          textAlign: "center",
+          borderColor: "dollargreen",
+          fontWeight: "semibold",
+          focusBorderColor: "dollargreen",
+          _hover: {
+            borderColor: "dollargreen",
+          },
+          borderWidth: 2,
+        }}
+        hideToggleButton={true}
+        listStyleProps={{
+          maxH: "200px",
+          overflowX: "hidden",
+          bgColor: "dollargreen",
+        }}
+        labelStyleProps={{ alignSelf: "center" }}
+      />
     </Box>
   );
 }

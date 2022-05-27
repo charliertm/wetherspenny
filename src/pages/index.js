@@ -1,11 +1,13 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Box, Container, Flex, Spinner } from "@chakra-ui/react";
 import Head from "next/head";
+import { useState } from "react";
 import Logo from "../../public/static/Logo.svg";
 import Footer from "../components/Footer";
 import PubInput from "../components/PubInput";
 import PubLocator from "../components/PubLocator";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
   return (
     <>
       <Head>
@@ -23,13 +25,19 @@ export default function Home() {
         justify={"space-between"}
         alignSelf={"center"}
         alignItems={"center"}
-        padding={20}
+        py={20}
       >
-        <Logo />
-        <Container align={"center"}>
-          <PubLocator />
-          <PubInput w={"full"} />
-        </Container>
+        <Box w={"full"} px={"5vw"}>
+          <Logo />
+        </Box>
+        {loading ? (
+          <Spinner size={"xl"} color="spoonyblue" thickness="4px" />
+        ) : (
+          <Container>
+            <PubLocator handleLoading={() => setLoading(true)} />
+            <PubInput w={"full"} handleLoading={() => setLoading(true)} />
+          </Container>
+        )}
         <Footer />
       </Flex>
     </>

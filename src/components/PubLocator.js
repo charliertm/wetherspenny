@@ -1,14 +1,15 @@
 import { Button, HStack, Skeleton, Text } from "@chakra-ui/react";
 import havershine from "haversine-distance";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BiCurrentLocation } from "react-icons/bi";
 import { pubs_info } from "../pubs_info";
 
-export default function PubLocator() {
+export default function PubLocator({ handleLoading }) {
   const [closestPub, setClosestPub] = useState();
   const [geoAvailable, setGeoAvailable] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
@@ -45,18 +46,23 @@ export default function PubLocator() {
   }, []);
 
   return (
-    <Button bgColor={"spoonyblue"} disabled={!geoAvailable || loading}>
+    <Button
+      bgColor={"spoonyblue"}
+      disabled={!geoAvailable || loading}
+      w={"full"}
+      size={"lg"}
+      onClick={() => {
+        router.push(closestPub.slug);
+        handleLoading();
+      }}
+    >
       <HStack>
         <BiCurrentLocation color="white" />
         {loading ? (
           <Skeleton w={28} h={4} />
         ) : (
           <Text textColor={"white"} fontWeight={600}>
-            {geoAvailable ? (
-              <Link href={closestPub.slug}>{closestPub.name}</Link>
-            ) : (
-              <Text>Location unavailable</Text>
-            )}
+            {geoAvailable ? closestPub.name : "Location unavailable"}
           </Text>
         )}
       </HStack>
