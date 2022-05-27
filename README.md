@@ -1,4 +1,4 @@
-![wetherspenny](public/static/TextLogo.svg "title")
+![wetherspenny](public/static/Logo.svg "title")
 
 [wetherspenny](https://www.wetherspenny.com) is a simple website to show you the cheapest drinks at wetherspoons
 
