@@ -1,13 +1,19 @@
-import { Center, Input, List, VStack } from "@chakra-ui/react";
-import { slugs_to_ids } from "../slugs_to_ids";
-import fetch from "node-fetch";
+import { Box, Flex, Input, List } from "@chakra-ui/react";
 import ErrorPage from "next/error";
-import DrinkCard from "../components/DrinkCard";
+import fetch from "node-fetch";
 import { useEffect, useState } from "react";
+import LogoWhite from "../../public/static/LogoWhite.svg";
+import DrinkCard from "../components/DrinkCard";
+import useLerpColorScroll from "../hooks/useLerpColorScroll";
+import { slugs_to_ids } from "../slugs_to_ids";
+import theme from "../styles/theme";
 
 export default function Slug(props) {
   const [drinks, setDrinks] = useState([]);
-  const [value, setValue] = useState("");
+  const color = useLerpColorScroll(
+    theme.colors.spoonyblue,
+    theme.colors.dollargreen
+  );
 
   useEffect(() => {
     setDrinks(props.data);
@@ -19,8 +25,6 @@ export default function Slug(props) {
 
   const handleChange = (event) => {
     event.preventDefault();
-    setValue(event.target.value);
-    // use event.target.value for filter rather than value because state is only available next render
     setDrinks(
       props.data.filter((drink) => {
         return drink.name
@@ -30,27 +34,27 @@ export default function Slug(props) {
     );
   };
   return (
-    <Center>
-      <VStack w={"full"}>
-        <Center pt={6} pb={4} pl={4} pr={4} w={"full"}>
-          <Input
-            placeholder={"Search for your favourites"}
-            p={6}
-            maxW={"800px"}
-            w={"full"}
-            bg={"white"}
-            boxShadow={"lg"}
-            rounded={"lg"}
-            borderWidth={1}
-            borderColor={"blackAlpha.200"}
-            onChange={handleChange}
-            value={value}
-            focusBorderColor={"wetherspoons.500"}
-            _hover={{
-              borderColor: "wetherspoons.500",
-            }}
-          />
-        </Center>
+    <Box bgColor={color} minH="100vh" align={"center"}>
+      <Flex flexDir={"column"} p={2} pt={8} maxW={"container.md"}>
+        <LogoWhite />
+        <Input
+          mt={6}
+          color="white"
+          placeholder={"Search for your favourites"}
+          _placeholder={{
+            opacity: 0.6,
+            color: "inherit",
+          }}
+          borderWidth={3}
+          borderColor="white"
+          textAlign="center"
+          fontWeight="semibold"
+          focusBorderColor="spoonyblue"
+          _hover={{
+            borderColor: "spoonyblue",
+          }}
+          onChange={(e) => handleChange(e)}
+        />
         <List w={"full"}>
           {drinks.map((drink, index) => {
             return (
@@ -64,8 +68,8 @@ export default function Slug(props) {
             );
           })}
         </List>
-      </VStack>
-    </Center>
+      </Flex>
+    </Box>
   );
 }
 
