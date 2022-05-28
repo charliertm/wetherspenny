@@ -1,5 +1,4 @@
 import { Box, Container, Flex, Spinner } from "@chakra-ui/react";
-import Head from "next/head";
 import { useState } from "react";
 import Logo from "../../public/static/Logo.svg";
 import Footer from "../components/Footer";
@@ -10,15 +9,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   return (
     <>
-      <Head>
-        <title>wetherspenny</title>
-        <meta property="og:title" content="wetherspenny" key="title" />
-        <link
-          rel="apple-touch-icon"
-          sizes="57x57"
-          href="public/apple-touch-icon.png"
-        />
-      </Head>
       <Flex
         h={"100vh"}
         flexDirection={"column"}
