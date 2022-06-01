@@ -1,5 +1,5 @@
 import { Box, Center, Text, VStack } from "@chakra-ui/react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import LogoWhite from "../../public/static/LogoWhite.svg";
 import step1 from "../../public/static/steps/step1.png";
 import step2 from "../../public/static/steps/step2.png";
@@ -8,7 +8,14 @@ import step4 from "../../public/static/steps/step4.png";
 import useLerpColorScroll from "../hooks/useLerpColorScroll";
 import theme from "../styles/theme";
 
-const StepCard = ({ src, alt, label, color }) => {
+type StepCardProps = {
+  src: StaticImageData;
+  alt: string;
+  label: string;
+  color: string;
+};
+
+const StepCard = ({ src, alt, label, color }: StepCardProps) => {
   return (
     <Box alignContent={"center"} bg="white" p={8} rounded={"md"}>
       <Text textColor={color} fontWeight={"semibold"} pb={4}>

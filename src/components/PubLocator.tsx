@@ -3,10 +3,14 @@ import havershine from "haversine-distance";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BiCurrentLocation } from "react-icons/bi";
-import { pubs_info } from "../pubs_info";
+import { pubInfoData, pubsInfo } from "../data/pubsInfo";
 
-export default function PubLocator({ handleLoading }) {
-  const [closestPub, setClosestPub] = useState();
+type PubLocatorProps = {
+  handleLoading: () => void;
+};
+
+export default function PubLocator({ handleLoading }: PubLocatorProps) {
+  const [closestPub, setClosestPub] = useState<pubInfoData | null>(null);
   const [geoAvailable, setGeoAvailable] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -24,7 +28,7 @@ export default function PubLocator({ handleLoading }) {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         };
-        const distances = pubs_info.map((pub) => {
+        const distances = pubsInfo.map((pub) => {
           const pubLocation = (({ latitude, longitude }) => ({
             latitude,
             longitude,
@@ -33,7 +37,7 @@ export default function PubLocator({ handleLoading }) {
         });
         const minDistance = Math.min(...distances);
         const closestPubIndex = distances.indexOf(minDistance);
-        setClosestPub(pubs_info[closestPubIndex]);
+        setClosestPub(pubsInfo[closestPubIndex]);
         setGeoAvailable(true);
         setLoading(false);
       },
@@ -52,7 +56,7 @@ export default function PubLocator({ handleLoading }) {
       w={"full"}
       size={"lg"}
       onClick={() => {
-        router.push(closestPub.slug);
+        router.push(closestPub!.slug);
         handleLoading();
       }}
     >
@@ -62,7 +66,7 @@ export default function PubLocator({ handleLoading }) {
           <Skeleton w={28} h={4} />
         ) : (
           <Text textColor={"white"} fontWeight={600}>
-            {geoAvailable ? closestPub.name : "Location unavailable"}
+            {geoAvailable ? closestPub!.name : "Location unavailable"}
           </Text>
         )}
       </HStack>

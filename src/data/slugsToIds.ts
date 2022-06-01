@@ -1,4 +1,4 @@
-export const slugs_to_ids = {
+export const slugsToIds: { [key: string]: number } = {
   "abraham-darby-brierley-hill": 5243,
   "st-matthews-hall-walsall": 6694,
   "the-arthur-robertson-birmingham": 5834,

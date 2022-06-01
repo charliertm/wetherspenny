@@ -9,7 +9,19 @@ import {
 import useLerpColorScroll from "../hooks/useLerpColorScroll";
 import theme from "../styles/theme";
 
-const PortionInfo = ({ name, price, unitsPerPound, color }) => {
+export type PortionInfoProps = {
+  name: string;
+  price: number;
+  unitsPerPound: number;
+  color: string;
+};
+
+const PortionInfo = ({
+  name,
+  price,
+  unitsPerPound,
+  color,
+}: PortionInfoProps) => {
   return (
     <Box w={"full"} pb={4} mx={2}>
       <HStack
@@ -26,22 +38,34 @@ const PortionInfo = ({ name, price, unitsPerPound, color }) => {
           textColor={"white"}
           fontWeight={"bold"}
           fontSize={"l"}
-        >{`£${parseFloat(price).toFixed(2)}`}</Text>
+        >{`£${price.toFixed(2)}`}</Text>
         <Text textColor={"white"} fontWeight={"bold"} fontSize={"l"}>
-          {`${parseFloat(unitsPerPound).toFixed(3)} u/£`}
+          {`${unitsPerPound.toFixed(3)} u/£`}
         </Text>
       </HStack>
     </Box>
   );
 };
 
-export default function DrinkCard({ name, abv, portions, rank }) {
+type DrinkCardProps = {
+  name: string;
+  abv: string;
+  portions: PortionInfoProps[];
+  rank: number;
+};
+
+export default function DrinkCard({
+  name,
+  abv,
+  portions,
+  rank,
+}: DrinkCardProps) {
   const { isOpen, onToggle } = useDisclosure();
-  const color = useLerpColorScroll(
+  const inverseColor = useLerpColorScroll(
     theme.colors.spoonyblue,
     theme.colors.dollargreen
   );
-  const inverseColor = useLerpColorScroll(
+  const color = useLerpColorScroll(
     theme.colors.dollargreen,
     theme.colors.spoonyblue
   );
@@ -80,7 +104,7 @@ export default function DrinkCard({ name, abv, portions, rank }) {
           </Text>
         </Center>
       </HStack>
-      <Collapse in={isOpen} w={"full"}>
+      <Collapse in={isOpen}>
         {portions.map((portion, index) => {
           return (
             <HStack key={index}>

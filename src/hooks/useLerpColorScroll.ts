@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import colorInterpolate from "../utils/colorInterpolate";
 
-export default function useLerpColorScroll(colorA, colorB) {
-  const [color, setColor] = useState();
-  const [scrollRatio, setScrollRatio] = useState(0);
+export default function useLerpColorScroll(
+  colorA: string,
+  colorB: string
+): string {
+  const [color, setColor] = useState<string>("");
+  const [scrollRatio, setScrollRatio] = useState<number>(0);
 
   useEffect(() => {
     const handleScroll = () => {

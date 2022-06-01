@@ -1,4 +1,13 @@
-export const pubs_info = [
+export type pubInfoData = {
+  id: string;
+  name: string;
+  city: string;
+  slug: string;
+  longitude: number;
+  latitude: number;
+};
+
+export const pubsInfo = [
   {
     id: "5243",
     name: "Abraham Darby",

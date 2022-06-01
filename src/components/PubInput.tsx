@@ -2,47 +2,56 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { CUIAutoComplete } from "chakra-ui-autocomplete";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { pubs_info } from "../pubs_info";
+import { pubInfoData, pubsInfo } from "../data/pubsInfo";
 
-const pubs = pubs_info.map((pub) => {
+const pubItems = pubsInfo.map((pub: pubInfoData) => {
   return {
-    value: pub,
-    label: pub.name,
+    value: pub.slug,
+    label: `${pub.name} | ${pub.city}`,
   };
 });
 
-export default function PubInput({ handleLoading, ...props }) {
-  const [pickerItems] = useState(pubs);
-  const [selectedItems, setSelectedItems] = useState([]);
+type Item = {
+  value: string;
+  label: string;
+};
+
+type PubInputProbs = {
+  handleLoading: () => void;
+};
+
+export default function PubInput({ handleLoading }: PubInputProbs) {
+  const [pickerItems] = useState<Item[]>(pubItems);
+  const [selectedItems, setSelectedItems] = useState<Item[]>([]);
   const router = useRouter();
 
-  const handleSelectedItemsChange = (selectedItems) => {
+  const handleSelectedItemsChange = (selectedItems?: Item[]) => {
     if (selectedItems) {
       handleLoading();
       setSelectedItems(selectedItems);
-      console.log("pushing !");
       if (selectedItems.length > 0) {
-        router.push(selectedItems[0].value.slug);
+        router.push(selectedItems[0].value);
       }
     }
   };
 
-  const customRender = (selected) => {
+  const customRender = (selected: Item) => {
     return (
       <Flex flexDir="column" width="full">
         <Text fontWeight={"bold"} textColor={"white"}>
-          {selected.label}{" "}
+          {selected.label.split("|")[0]}{" "}
         </Text>
         <Text fontWeight={"light"} fontSize={"sm"} textColor={"white"}>
-          {selected.value.city}
+          {selected.label.split("|")[1]}
         </Text>
       </Flex>
     );
   };
 
   return (
-    <Box {...props}>
+    <Box w={"full"}>
       <CUIAutoComplete
+        label=""
         disableCreateItem={true}
         items={pickerItems}
         selectedItems={selectedItems}

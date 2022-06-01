@@ -25,7 +25,7 @@ export default function Home() {
         ) : (
           <Container>
             <PubLocator handleLoading={() => setLoading(true)} />
-            <PubInput w={"full"} handleLoading={() => setLoading(true)} />
+            <PubInput handleLoading={() => setLoading(true)} />
           </Container>
         )}
         <Footer />
