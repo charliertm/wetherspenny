@@ -163,10 +163,15 @@ const getProductsData = (products: PurpleProduct[]): ProductData[] => {
     if (portionsData.length === 0) {
       return;
     }
+    const sortedPortionsData = portionsData.sort((portionA, portionB) => {
+      return (
+        Math.max(portionB.unitsPerPound) - Math.max(portionA.unitsPerPound)
+      );
+    });
     productsData.push({
       name: product.displayName,
       abv: abv,
-      portions: portionsData,
+      portions: sortedPortionsData,
     });
   });
 
