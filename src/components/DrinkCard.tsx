@@ -7,14 +7,13 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import useLerpColorScroll from "../hooks/useLerpColorScroll";
+import { RankedProductData } from "../pages/[slug]";
 import theme from "../styles/theme";
+import { PortionData } from "../utils/api/ProductData";
 
-export type PortionInfoProps = {
-  name: string;
-  price: number;
-  unitsPerPound: number;
+interface PortionInfoProps extends PortionData {
   color: string;
-};
+}
 
 const PortionInfo = ({
   name,
@@ -47,19 +46,12 @@ const PortionInfo = ({
   );
 };
 
-type DrinkCardProps = {
-  name: string;
-  abv: string;
-  portions: PortionInfoProps[];
-  rank: number;
-};
-
 export default function DrinkCard({
   name,
   abv,
   portions,
   rank,
-}: DrinkCardProps) {
+}: RankedProductData) {
   const { isOpen, onToggle } = useDisclosure();
   const inverseColor = useLerpColorScroll(
     theme.colors.spoonyblue,

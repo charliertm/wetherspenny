@@ -1,22 +1,16 @@
 import { Box, Flex, Input, List } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import ErrorPage from "next/error";
-import fetch from "node-fetch";
 import { ChangeEvent, useEffect, useState } from "react";
 import LogoWhite from "../../public/static/LogoWhite.svg";
-import type { PortionInfoProps } from "../components/DrinkCard";
 import DrinkCard from "../components/DrinkCard";
 import { slugsToIds } from "../data/slugsToIds";
 import useLerpColorScroll from "../hooks/useLerpColorScroll";
 import theme from "../styles/theme";
+import { getProductsDataFromPubId } from "../utils/api";
+import { ProductData } from "../utils/api/ProductData";
 
-type DrinkData = {
-  name: string;
-  abv: number;
-  portions: PortionInfoProps[];
-};
-
-interface RankedDrinkData extends DrinkData {
+export interface RankedProductData extends ProductData {
   rank: number;
 }
 
@@ -25,9 +19,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const params = context.params!;
     const slug = params.slug as string;
     const id = slugsToIds[slug];
-    const res = await fetch(`https://wetherspenny-api.herokuapp.com/${id}`);
-    const dataRecieved = (await res.json()) as DrinkData[];
-    const data: RankedDrinkData[] = dataRecieved.map((drink, index) => ({
+    const dataRecieved = await getProductsDataFromPubId(id);
+    const data: RankedProductData[] = dataRecieved.map((drink, index) => ({
       ...drink,
       rank: index + 1,
     }));
@@ -42,8 +35,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 };
 
-export default function Slug({ data }: { data: RankedDrinkData[] }) {
-  const [drinks, setDrinks] = useState<RankedDrinkData[]>([]);
+export default function Slug({ data }: { data: RankedProductData[] }) {
+  const [drinks, setDrinks] = useState<RankedProductData[]>([]);
   const color = useLerpColorScroll(
     theme.colors.dollargreen,
     theme.colors.spoonyblue
@@ -94,7 +87,7 @@ export default function Slug({ data }: { data: RankedDrinkData[] }) {
               <DrinkCard
                 key={index}
                 name={drink.name}
-                abv={drink.abv.toString()}
+                abv={drink.abv}
                 rank={drink.rank}
                 portions={drink.portions}
               ></DrinkCard>
