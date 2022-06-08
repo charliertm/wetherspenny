@@ -61,7 +61,7 @@ export default function Slug({ data }: { data: RankedProductData[] }) {
   };
   return (
     <Box bgColor={color} minH="100vh" align={"center"}>
-      <Flex flexDir={"column"} p={2} pt={8} maxW={"container.md"}>
+      <Flex flexDir={"column"} p={2} pt={6} maxW={"container.md"}>
         <LogoWhite />
         <Input
           mt={6}
@@ -83,7 +83,7 @@ export default function Slug({ data }: { data: RankedProductData[] }) {
         <List w={"full"}>
           {drinks.map((drink, index) => {
             return (
-              <SlideFade in={true} delay={index / 10} key={index}>
+              <SlideFade in={true} delay={Math.sqrt(index / 10)} key={index}>
                 <DrinkCard
                   key={index}
                   name={drink.name}

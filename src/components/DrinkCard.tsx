@@ -70,13 +70,18 @@ export default function DrinkCard({
       boxShadow={"md"}
       onClick={onToggle}
     >
-      <Flex direction={"row"} justify={"space-between"} minH={28}>
+      <Flex
+        direction={"row"}
+        justify={"space-between"}
+        minH={32}
+        align={"center"}
+      >
         <Flex direction={"column"} ml={2} mr={4} my={4} alignSelf={"center"}>
           <Text
             textAlign="start"
             color={inverseColor}
             fontWeight="bold"
-            fontSize={"xl"}
+            fontSize={"2xl"}
             noOfLines={isOpen ? undefined : 2}
           >
             {name}{" "}
@@ -92,36 +97,48 @@ export default function DrinkCard({
           </Text>
         </Flex>
 
-        <Flex direction={"row"}>
+        <Flex
+          direction={"row"}
+          textColor="white"
+          fontWeight={"semibold"}
+          fontSize="xl"
+        >
           <Center
             bgColor={inverseColor}
             px={2}
             mr={2}
             my={4}
-            minW={20}
-            maxH={20}
+            minW={16}
+            h={16}
             rounded={"md"}
           >
-            <Text color="white" fontWeight={"semibold"} fontSize="xl">
-              {rank}
-            </Text>
+            <Text>{`#${rank}`}</Text>
           </Center>
           <Center
             bgColor={color}
             px={2}
             mr={2}
             my={4}
-            minW={20}
-            maxH={20}
+            minW={16}
+            h={16}
             rounded={"md"}
           >
-            <Text color="white" fontWeight={"semibold"} fontSize="lg">
-              {(portions[0].unitsPerPound * 100).toFixed(1)}
-            </Text>
+            <Text>{(portions[0].unitsPerPound * 100).toFixed(1)}</Text>
           </Center>
         </Flex>
       </Flex>
       <Collapse in={isOpen}>
+        <Flex
+          direction={"row"}
+          fontWeight={"semibold"}
+          pb={2}
+          mx={2}
+          textColor={inverseColor}
+        >
+          <Text flex={1}>Portion</Text>
+          <Text flex={1}>Price</Text>
+          <Text flex={1}>Score</Text>
+        </Flex>
         {portions.map((portion, index) => {
           return (
             <HStack key={index}>
