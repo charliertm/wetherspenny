@@ -1,4 +1,4 @@
-import { Box, Flex, Input, List } from "@chakra-ui/react";
+import { Box, Flex, Input, List, SlideFade } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import ErrorPage from "next/error";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -71,10 +71,9 @@ export default function Slug({ data }: { data: RankedProductData[] }) {
             opacity: 0.6,
             color: "inherit",
           }}
-          borderWidth={3}
+          borderWidth={2}
           borderColor="white"
           textAlign="center"
-          fontWeight="semibold"
           focusBorderColor="spoonyblue"
           _hover={{
             borderColor: "spoonyblue",
@@ -84,13 +83,15 @@ export default function Slug({ data }: { data: RankedProductData[] }) {
         <List w={"full"}>
           {drinks.map((drink, index) => {
             return (
-              <DrinkCard
-                key={index}
-                name={drink.name}
-                abv={drink.abv}
-                rank={drink.rank}
-                portions={drink.portions}
-              ></DrinkCard>
+              <SlideFade in={true} delay={index / 10} key={index}>
+                <DrinkCard
+                  key={index}
+                  name={drink.name}
+                  abv={drink.abv}
+                  rank={drink.rank}
+                  portions={drink.portions}
+                ></DrinkCard>
+              </SlideFade>
             );
           })}
         </List>

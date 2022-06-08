@@ -2,6 +2,7 @@ import {
   Box,
   Center,
   Collapse,
+  Flex,
   HStack,
   Text,
   useDisclosure,
@@ -22,26 +23,24 @@ const PortionInfo = ({
   color,
 }: PortionInfoProps) => {
   return (
-    <Box w={"full"} pb={4} mx={2}>
-      <HStack
-        justify={"space-evenly"}
-        w={"full"}
+    <Box w={"full"} pb={2} mx={2}>
+      <Flex
+        direction={"row"}
+        h={20}
         bgColor={color}
+        align={"center"}
         rounded={"md"}
-        p={4}
       >
-        <Text textColor={"white"} fontWeight={"bold"} fontSize={"l"}>
+        <Text flex={1} color="white" fontSize={"lg"} fontWeight={"semibold"}>
           {name}
         </Text>
-        <Text
-          textColor={"white"}
-          fontWeight={"bold"}
-          fontSize={"l"}
-        >{`£${price.toFixed(2)}`}</Text>
-        <Text textColor={"white"} fontWeight={"bold"} fontSize={"l"}>
-          {`${unitsPerPound.toFixed(3)} u/£`}
+        <Text flex={1} color="white" fontSize={"lg"} fontWeight={"semibold"}>
+          {`£${price.toFixed(2)}`}
         </Text>
-      </HStack>
+        <Text flex={1} color="white" fontSize={"lg"} fontWeight={"semibold"}>
+          {(unitsPerPound * 100).toFixed(1)}
+        </Text>
+      </Flex>
     </Box>
   );
 };
@@ -67,35 +66,61 @@ export default function DrinkCard({
       textAlign={"center"}
       bgColor={"white"}
       rounded={"md"}
-      my={8}
+      my={4}
+      boxShadow={"md"}
       onClick={onToggle}
     >
-      <HStack w="full" justify={"space-between"} py={8} px={2}>
-        <Center rounded={"md"} bgColor={color} p={4}>
-          <Text textColor={"white"} fontWeight={"bold"}>
-            {`#${rank}`}
-          </Text>
-        </Center>
-
-        <Text
-          textColor={inverseColor}
-          fontWeight={"black"}
-          fontSize={["2xl", "3xl"]}
-          px={2}
-        >
-          {name}
-        </Text>
-        <Center rounded={"md"} p={2}>
+      <Flex direction={"row"} justify={"space-between"} minH={28}>
+        <Flex direction={"column"} ml={2} mr={4} my={4} alignSelf={"center"}>
           <Text
-            textColor={color}
-            fontWeight={"semibold"}
-            fontStyle={"italic"}
+            textAlign="start"
+            color={inverseColor}
+            fontWeight="bold"
             fontSize={"xl"}
+            noOfLines={isOpen ? undefined : 2}
+          >
+            {name}{" "}
+          </Text>
+          <Text
+            textAlign="start"
+            color={color}
+            fontSize="md"
+            fontWeight="semibold"
+            fontStyle={"italic"}
           >
             {`${abv}%`}
           </Text>
-        </Center>
-      </HStack>
+        </Flex>
+
+        <Flex direction={"row"}>
+          <Center
+            bgColor={inverseColor}
+            px={2}
+            mr={2}
+            my={4}
+            minW={20}
+            maxH={20}
+            rounded={"md"}
+          >
+            <Text color="white" fontWeight={"semibold"} fontSize="xl">
+              {rank}
+            </Text>
+          </Center>
+          <Center
+            bgColor={color}
+            px={2}
+            mr={2}
+            my={4}
+            minW={20}
+            maxH={20}
+            rounded={"md"}
+          >
+            <Text color="white" fontWeight={"semibold"} fontSize="lg">
+              {(portions[0].unitsPerPound * 100).toFixed(1)}
+            </Text>
+          </Center>
+        </Flex>
+      </Flex>
       <Collapse in={isOpen}>
         {portions.map((portion, index) => {
           return (
