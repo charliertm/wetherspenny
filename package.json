@@ -3,7 +3,7 @@
   "author": "charliertm",
   "description": "wetherspenny shows you the best value drinks at any Wetherspoon pub",
   "version": "1.0.0",
-  "license": "MIT",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "homepage": "https://github.com/charliertm/wetherspenny",
   "private": true,
   "engines": {

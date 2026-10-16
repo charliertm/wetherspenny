@@ -49,7 +49,9 @@ export default function DrinkCard({
 
   return (
     <li
-      className="animate-rise"
+      // Off-screen cards skip layout and paint, so expanding one card doesn't
+      // re-lay out the whole list on every animation frame
+      className="animate-rise [contain-intrinsic-size:auto_100px] [content-visibility:auto]"
       style={{ animationDelay: index < 12 ? `${index * 35}ms` : undefined }}
     >
       <div className="overflow-hidden rounded-3xl bg-surface shadow-sm ring-1 ring-black/5 transition-shadow dark:ring-white/5">
@@ -98,7 +100,7 @@ export default function DrinkCard({
 
         <div
           id={panelId}
-          className="grid transition-[grid-template-rows] duration-300 ease-out"
+          className="grid transition-[grid-template-rows] duration-250 ease-out motion-reduce:transition-none"
           style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
         >
           <div className="overflow-hidden" inert={!open}>

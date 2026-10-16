@@ -45,7 +45,7 @@ function Highlight({
   detail: string;
 }) {
   return (
-    <div className="min-w-0 rounded-3xl bg-white/12 p-3.5 text-white ring-1 ring-white/20 backdrop-blur-md">
+    <div className="min-w-0 rounded-3xl bg-white/12 p-3.5 text-white ring-1 ring-white/20">
       <p className="flex items-center gap-1.5 text-[11px] font-semibold tracking-wider uppercase opacity-80">
         {icon}
         {title}
@@ -149,7 +149,7 @@ export default function DrinkExplorer({
       <div className="sticky top-0 z-20 mt-2 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3">
         <div
           aria-hidden
-          className="absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_55%,transparent)] backdrop-blur-xl"
+          className="absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_55%,transparent)] backdrop-blur-md"
         />
         <div className="relative">
           <Search className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-muted" />
@@ -203,7 +203,7 @@ export default function DrinkExplorer({
           ))}
         </ChipScroller>
 
-        <div className="flex items-center justify-between gap-3 px-4">
+        <div className="flex items-center justify-between gap-2 px-4">
           <div
             className="flex rounded-full bg-black/15 p-0.5"
             role="group"
@@ -215,7 +215,7 @@ export default function DrinkExplorer({
                 key={key}
                 onClick={() => setSort(key)}
                 aria-pressed={sort === key}
-                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+                className={`rounded-full px-2.5 py-1 text-xs font-semibold whitespace-nowrap transition ${
                   sort === key
                     ? "bg-surface text-text shadow-sm"
                     : "text-white/85 hover:text-white"
@@ -233,7 +233,7 @@ export default function DrinkExplorer({
               onChange={(event) => setIncludeDeals(event.target.checked)}
               className="peer sr-only"
             />
-            <span className="relative h-6 w-10 rounded-full bg-black/25 ring-1 ring-white/30 transition peer-checked:bg-white peer-focus-visible:ring-2 peer-focus-visible:ring-white after:absolute after:top-0.5 after:left-0.5 after:size-5 after:rounded-full after:bg-white after:shadow after:transition peer-checked:after:translate-x-4 peer-checked:after:bg-neutral-900" />
+            <span className="relative h-7 w-12 rounded-full bg-black/15 transition peer-focus-visible:ring-2 peer-focus-visible:ring-white after:absolute after:top-0.5 after:left-0.5 after:size-6 after:rounded-full after:bg-white after:shadow-sm after:transition-transform after:duration-200 peer-checked:after:translate-x-5" />
           </label>
         </div>
       </div>

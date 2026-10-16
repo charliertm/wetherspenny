@@ -44,8 +44,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  --animate-fade: fade 0.3s ease-out both;
+  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  --animate-fade: fade 0.3s ease-out backwards;
 
   @keyframes rise {
     from {
@@ -78,11 +78,20 @@ body {
 }
 
 /* Pub page background: green at the top of the list fading to blue at the
-   bottom as you scroll, like the original site */
+   bottom as you scroll, like the original site. The gradient is a tall layer
+   moved with a transform, which the compositor can do without repainting. */
 .backdrop {
   position: fixed;
   inset: 0;
   z-index: -1;
+  overflow: hidden;
+  background: var(--backdrop-from);
+}
+
+.backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
     to bottom,
     var(--backdrop-from),
@@ -91,8 +100,10 @@ body {
 }
 
 @supports (animation-timeline: scroll()) {
-  .backdrop {
-    background-size: 100% 300%;
+  .backdrop::before {
+    bottom: auto;
+    height: 300%;
+    will-change: transform;
     animation: backdrop-shift linear both;
     animation-timeline: scroll(root);
   }
@@ -100,14 +111,14 @@ body {
 
 @keyframes backdrop-shift {
   to {
-    background-position: 0 100%;
+    transform: translateY(-66.6667%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *:not(.backdrop),
+  *::after,
+  *:not(.backdrop)::before {
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;

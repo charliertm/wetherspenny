@@ -126,7 +126,11 @@ export default function Privacy() {
               </li>
               <li>
                 The site is provided as is, without any warranty. The code is
-                open source under the MIT licence.
+                public for non-commercial use under the{" "}
+                <a href="https://polyformproject.org/licenses/noncommercial/1.0.0">
+                  PolyForm Noncommercial licence
+                </a>
+                .
               </li>
             </ul>
           </Section>
