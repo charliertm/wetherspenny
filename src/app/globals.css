@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --blue: #0563c9;
+  --green: #009245;
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --border: #e1e7ef;
+  --text: #0e1726;
+  --muted: #5d6b82;
+  --logo-blue: var(--blue);
+  --logo-green: var(--green);
+  --backdrop-from: #009245;
+  --backdrop-to: #0563c9;
+  color-scheme: light;
+}
+
+.dark {
+  --blue: #4d9bf7;
+  --green: #2fbf71;
+  --bg: #070b13;
+  --surface: #0f1624;
+  --surface-2: #172134;
+  --border: #212d42;
+  --text: #e8eef8;
+  --muted: #8d9bb3;
+  --backdrop-from: #053b22;
+  --backdrop-to: #062a57;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-blue: var(--blue);
+  --color-green: var(--green);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade: fade 0.3s ease-out both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.logo-blue {
+  fill: var(--logo-blue);
+}
+.logo-green {
+  fill: var(--logo-green);
+}
+.logo-white {
+  --logo-blue: #fff;
+  --logo-green: #fff;
+}
+
+/* Pub page background: green at the top of the list fading to blue at the
+   bottom as you scroll, like the original site */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    var(--backdrop-from),
+    var(--backdrop-to)
+  );
+}
+
+@supports (animation-timeline: scroll()) {
+  .backdrop {
+    background-size: 100% 300%;
+    animation: backdrop-shift linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes backdrop-shift {
+  to {
+    background-position: 0 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

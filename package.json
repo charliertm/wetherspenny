@@ -1,47 +1,43 @@
 {
   "name": "wetherspenny",
   "author": "charliertm",
-  "description": "wetherspenny is a simple website to show you the cheapest drinks at wetherspoons",
-  "version": "0.1.0",
+  "description": "wetherspenny shows you the best value drinks at any Wetherspoon pub",
+  "version": "1.0.0",
   "license": "MIT",
   "homepage": "https://github.com/charliertm/wetherspenny",
   "private": true,
   "engines": {
-    "node": ">=16.0.0",
-    "yarn": ">=1.22.0",
-    "npm": "please-use-yarn"
+    "node": ">=20.9.0"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prettier": "prettier --write .",
-    "prepare": "husky install"
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.7.4",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "chakra-ui-autocomplete": "^1.4.5",
-    "framer-motion": "^5",
-    "haversine-distance": "^1.2.1",
-    "next": "^12.1.6",
-    "node-fetch": "^3.2.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-icons": "^4.3.1"
+    "lucide-react": "^1.58.0",
+    "next": "16.4.2",
+    "next-themes": "^0.4.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.1",
-    "@commitlint/config-conventional": "^17.0.0",
-    "@svgr/webpack": "^6.2.0",
-    "@types/node": "^17.0.36",
-    "@types/react": "^18.0.10",
-    "eslint": "8.7.0",
-    "eslint-config-next": "12.0.8",
-    "husky": "^8.0.1",
-    "prettier": "^2.6.2",
-    "typescript": "^4.7.2"
-  }
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "prettier": "^3",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^5.0.5"
+  },
+  "packageManager": "pnpm@9.1.4"
 }
