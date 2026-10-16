@@ -55,8 +55,9 @@ export default function Privacy() {
 
           <Section title="The short version">
             <p>
-              wetherspenny has no accounts, no cookies, no analytics, no ads and
-              no tracking. Nothing about you is sent to us.
+              wetherspenny has no accounts, no cookies, no ads and no tracking
+              across sites. We only count visits anonymously to see which pages
+              are used.
             </p>
           </Section>
 
@@ -101,6 +102,16 @@ export default function Privacy() {
                 The site is hosted by{" "}
                 <a href="https://vercel.com/legal/privacy-policy">Vercel</a>,
                 which keeps standard server logs to run and protect it.
+              </li>
+              <li>
+                Visits are counted with{" "}
+                <a href="https://vercel.com/docs/analytics/privacy-policy">
+                  Vercel Web Analytics
+                </a>
+                , which records the page viewed, the referring site, your
+                country and your device and browser type. It doesn&apos;t use
+                cookies or store anything on your device, and it can&apos;t
+                identify you or follow you across other sites.
               </li>
             </ul>
           </Section>
