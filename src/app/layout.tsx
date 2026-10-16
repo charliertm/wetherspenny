@@ -32,7 +32,7 @@ export const metadata: Metadata = {
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: "/favicon/apple-touch-icon.png",
+    apple: { url: "/icons/apple-touch-icon.png", sizes: "180x180" },
   },
 };
 
@@ -40,10 +40,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f6f9" },
-    { media: "(prefers-color-scheme: dark)", color: "#070b13" },
-  ],
+  themeColor: "#f4f6f9",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -54,7 +51,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
-        <ThemeProvider attribute="class" disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>

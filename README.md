@@ -24,6 +24,8 @@ pnpm typecheck
 pnpm lint
 ```
 
+Home screen icons in `public/icons` are generated from `assets/app-icon.svg` (and `assets/app-icon-maskable.svg` for Android's masked icons), e.g. `rsvg-convert -w 512 -h 512 assets/app-icon.svg -o public/icons/icon-512.png`. The browser tab favicon is separate.
+
 ## Tech Stack
 
 Next.js 16 (App Router, Cache Components), React 19, Tailwind CSS 4, TypeScript, Vitest, deployed on Vercel.

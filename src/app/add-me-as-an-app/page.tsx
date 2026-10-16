@@ -1,14 +1,16 @@
-import { ChevronLeft, EllipsisVertical, Share, SquarePlus } from "lucide-react";
+import {
+  ChevronLeft,
+  Ellipsis,
+  EllipsisVertical,
+  Menu,
+  Share,
+  SquarePlus,
+} from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import ThemeToggle from "@/components/ThemeToggle";
-import step1 from "../../../public/static/steps/step1.png";
-import step2 from "../../../public/static/steps/step2.png";
-import step3 from "../../../public/static/steps/step3.png";
-import step4 from "../../../public/static/steps/step4.png";
 
 export const metadata: Metadata = {
   title: "Add me as an app",
@@ -16,12 +18,43 @@ export const metadata: Metadata = {
     "Add wetherspenny to your home screen so it's always a tap away.",
 };
 
-const IOS_STEPS = [
-  { image: step1, label: "Tap the share button in Safari" },
-  { image: step2, label: "Choose Add to Home Screen" },
-  { image: step3, label: "Tap Add" },
-  { image: step4, label: "Admire!" },
-];
+function Key({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="mx-0.5 inline-flex translate-y-[-1px] items-center gap-1 rounded-lg bg-surface-2 px-1.5 py-0.5 align-middle text-sm font-semibold whitespace-nowrap">
+      {children}
+    </span>
+  );
+}
+
+function Steps({
+  title,
+  subtitle,
+  steps,
+  note,
+}: {
+  title: string;
+  subtitle: string;
+  steps: React.ReactNode[];
+  note?: React.ReactNode;
+}) {
+  return (
+    <section className="animate-rise rounded-3xl bg-surface p-5 text-text shadow-lg shadow-black/10">
+      <h2 className="text-lg font-bold">{title}</h2>
+      <p className="text-sm text-muted">{subtitle}</p>
+      <ol className="mt-4 space-y-3">
+        {steps.map((step, index) => (
+          <li key={index} className="flex gap-3">
+            <span className="grid size-7 shrink-0 place-items-center rounded-full bg-blue text-sm font-bold text-white">
+              {index + 1}
+            </span>
+            <span className="pt-0.5 leading-relaxed">{step}</span>
+          </li>
+        ))}
+      </ol>
+      {note && <p className="mt-4 text-sm text-muted">{note}</p>}
+    </section>
+  );
+}
 
 export default function AddMeAsAnApp() {
   return (
@@ -47,58 +80,77 @@ export default function AddMeAsAnApp() {
             Add me as an app
           </h1>
           <p className="mt-2 text-white/80">
-            Put wetherspenny on your home screen so the cheapest round is always
-            one tap away.
+            Put wetherspenny on your home screen and it opens full screen like a
+            normal app, so the cheapest round is always one tap away. No app
+            store needed.
           </p>
         </header>
 
-        <section className="mt-6">
-          <h2 className="px-4 text-sm font-semibold tracking-wider text-white/80 uppercase">
-            iPhone
-          </h2>
-          <ol className="mt-3 flex snap-x snap-mandatory scroll-px-4 [scrollbar-width:none] gap-3 overflow-x-auto px-4 pb-2">
-            {IOS_STEPS.map(({ image, label }, index) => (
-              <li
-                key={label}
-                className="w-[72%] max-w-64 shrink-0 animate-rise snap-start rounded-3xl bg-surface p-3 text-text shadow-lg shadow-black/10"
-                style={{ animationDelay: `${index * 60}ms` }}
-              >
-                <p className="px-1 pb-3 text-sm font-semibold">
-                  <span className="text-blue">Step {index + 1}</span> · {label}
-                </p>
-                <Image
-                  src={image}
-                  alt={`Step ${index + 1}: ${label}`}
-                  sizes="256px"
-                  className="w-full rounded-2xl"
-                  placeholder="blur"
-                />
-              </li>
-            ))}
-          </ol>
-          <p className="mt-2 flex items-center gap-1.5 px-4 text-sm text-white/80">
-            In Safari: <Share className="size-4" /> then
-            <SquarePlus className="size-4" /> Add to Home Screen
-          </p>
-        </section>
+        <div className="mt-6 space-y-4 px-4">
+          <Steps
+            title="iPhone & iPad"
+            subtitle="Safari, Chrome or Edge"
+            steps={[
+              <>
+                Open wetherspenny and tap{" "}
+                <Key>
+                  <Ellipsis className="size-4" /> More
+                </Key>{" "}
+                next to the address bar, then{" "}
+                <Key>
+                  <Share className="size-4" /> Share
+                </Key>
+                .
+              </>,
+              <>
+                Scroll down and tap{" "}
+                <Key>
+                  <SquarePlus className="size-4" /> Add to Home Screen
+                </Key>
+                .
+              </>,
+              <>
+                Leave <strong>Open as Web App</strong> switched on and tap{" "}
+                <strong>Add</strong>.
+              </>,
+            ]}
+            note={
+              <>
+                On iOS 18 or earlier, tap the{" "}
+                <Share className="inline size-4 align-text-bottom" /> Share
+                button in the toolbar instead, then Add to Home Screen.
+              </>
+            }
+          />
 
-        <section className="mx-4 mt-8 rounded-3xl bg-surface p-5 text-text shadow-lg shadow-black/10">
-          <h2 className="text-sm font-semibold tracking-wider text-muted uppercase">
-            Android
-          </h2>
-          <ol className="mt-3 list-inside list-decimal space-y-2">
-            <li>
-              Open wetherspenny in Chrome and tap the{" "}
-              <EllipsisVertical className="inline size-4 align-text-bottom" />{" "}
-              menu
-            </li>
-            <li>
-              Tap <strong>Add to Home screen</strong> or{" "}
-              <strong>Install app</strong>
-            </li>
-            <li>Tap Install</li>
-          </ol>
-        </section>
+          <Steps
+            title="Android"
+            subtitle="Chrome"
+            steps={[
+              <>
+                Open wetherspenny and tap the{" "}
+                <Key>
+                  <EllipsisVertical className="size-4" /> menu
+                </Key>{" "}
+                in the top corner.
+              </>,
+              <>
+                Tap <Key>Add to home screen</Key>, then choose{" "}
+                <strong>Install</strong>.
+              </>,
+              <>
+                Tap Install again to confirm. It&apos;ll appear with your apps.
+              </>,
+            ]}
+            note={
+              <>
+                Using Samsung Internet? Tap{" "}
+                <Menu className="inline size-4 align-text-bottom" /> menu, then{" "}
+                <strong>Add page to</strong> and <strong>Home screen</strong>.
+              </>
+            }
+          />
+        </div>
       </main>
       <Footer className="mx-auto mt-8 w-full max-w-xl rounded-t-3xl bg-bg" />
     </>

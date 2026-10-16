@@ -4,7 +4,7 @@ import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
-const ORDER = ["system", "light", "dark"] as const;
+const ORDER = ["light", "dark", "system"] as const;
 const ICONS = { system: Monitor, light: Sun, dark: Moon };
 const LABELS = {
   system: "System theme",
@@ -28,9 +28,9 @@ export default function ThemeToggle({
   );
 
   const current = mounted
-    ? ((theme as (typeof ORDER)[number]) ?? "system")
-    : "system";
-  const Icon = ICONS[current] ?? Monitor;
+    ? ((theme as (typeof ORDER)[number]) ?? "light")
+    : "light";
+  const Icon = ICONS[current] ?? Sun;
   const next = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length];
 
   return (

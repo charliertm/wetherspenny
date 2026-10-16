@@ -4,6 +4,7 @@ import { Beer, Search, Trophy, X } from "lucide-react";
 import { useDeferredValue, useMemo, useRef, useState } from "react";
 import { CATEGORY_LABELS, type CategoryKey, type Drink } from "@/lib/drinks";
 import { searchable } from "@/lib/venues";
+import ChipScroller from "./ChipScroller";
 import DrinkCard, { formatMoney, type RankedDrink } from "./DrinkCard";
 
 type Sort = "value" | "price" | "abv";
@@ -180,11 +181,7 @@ export default function DrinkExplorer({
       </div>
 
       <div className="space-y-2.5 pt-1 pb-3">
-        <div
-          className="flex snap-x scroll-px-4 [scrollbar-width:none] gap-2 overflow-x-auto px-4 pb-1"
-          role="group"
-          aria-label="Filter by type"
-        >
+        <ChipScroller label="Filter by type">
           <button
             type="button"
             onClick={() => setCategory("all")}
@@ -204,7 +201,7 @@ export default function DrinkExplorer({
               {CATEGORY_LABELS[key]}
             </button>
           ))}
-        </div>
+        </ChipScroller>
 
         <div className="flex items-center justify-between gap-3 px-4">
           <div
@@ -236,7 +233,7 @@ export default function DrinkExplorer({
               onChange={(event) => setIncludeDeals(event.target.checked)}
               className="peer sr-only"
             />
-            <span className="relative h-6 w-10 rounded-full bg-black/25 transition peer-checked:bg-green peer-focus-visible:ring-2 peer-focus-visible:ring-white after:absolute after:top-0.5 after:left-0.5 after:size-5 after:rounded-full after:bg-white after:shadow after:transition peer-checked:after:translate-x-4" />
+            <span className="relative h-6 w-10 rounded-full bg-black/25 ring-1 ring-white/30 transition peer-checked:bg-white peer-focus-visible:ring-2 peer-focus-visible:ring-white after:absolute after:top-0.5 after:left-0.5 after:size-5 after:rounded-full after:bg-white after:shadow after:transition peer-checked:after:translate-x-4 peer-checked:after:bg-neutral-900" />
           </label>
         </div>
       </div>
